@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <title>Radaris Reverse API</title>
+    <style>
+      body {
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <h3 id="project-description">Project Description</h3>
+    <p>The Radaris.com Reverse API project is designed to interact with Radaris.com, enabling users to search for individuals and retrieve detailed profile information. It provides a Flask-based web service that exposes several endpoints to perform these operations. Users can search for people by name, retrieve profile URLs from a given name, and get detailed data from an individual&#39;s profile.</p>
+    <h3 id="get-started">Get started</h3>
+    <h4 id="1-search-for-a-person">1. Search for a person</h4>
+    <p>
+      <strong>Endpoint:</strong>
+    </p>
+    <pre>
+      <code>GET /<span class="hljs-built_in">search</span></code>
+    </pre>
+    <p>
+      <strong>Description:</strong>
+      This endpoint allows you to search for people based on a provided name. It returns a list of possible matches with their names and profile URLs.
+    </p>
+    <p>
+      <strong>Parameters:</strong>
+    </p>
+    <ul>
+      <li>
+        <code>name</code> (required): The name of the person to search for.
+      </li>
+    </ul>
+    <p>
+      <strong>Example Request:</strong>
+    </p>
+    <pre>
+      <code class="lang-bash"><span class="hljs-attribute">curl</span> -G http://localhost:5000/search --data-urlencode <span class="hljs-string">"name=Kazimierczuk"</span></code>
+    </pre>
+    <p>
+      <strong>Example Response:</strong>
+    </p>
+    <pre>
+      <code class="lang-json">
+        [ {
+        <span class="hljs-attr">"href"</span>: <span class="hljs-string">"/p/Adam/Kazimierczuk/"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Adam Kazimierczuk"</span>
+        }, {
+        <span class="hljs-attr">"href"</span>: <span class="hljs-string">"/p/Alicia/Kazimierczuk/"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Alicia Kazimierczuk"</span>
+        }, {
+        <span class="hljs-attr">"href"</span>: <span class="hljs-string">"/p/Alicja/Kazimierczuk/"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Alicja Kazimierczuk"</span>
+        } ]
+      </code>
+    </pre>
+    <h4 id="2-get-profile-urls">2. Get profile URLs</h4>
+    <p>
+      <strong>Endpoint:</strong>
+    </p>
+    <pre>
+      <code><span class="hljs-attribute">GET</span> /urls</code>
+    </pre>
+    <p>
+      <strong>Description:</strong>
+      This endpoint retrieves profile URLs for a person based on a provided URL fragment.
+    </p>
+    <p>
+      <strong>Parameters:</strong>
+    </p>
+    <ul>
+      <li>
+        <code>href</code> (required): The URL fragment of the person&#39;s profile.
+      </li>
+    </ul>
+    <p>
+      <strong>Example Request:</strong>
+    </p>
+    <pre>
+      <code class="lang-bash">curl -G http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">5000</span><span class="hljs-regexp">/urls --data-urlencode "href=/</span>p<span class="hljs-regexp">/Adam/</span>Kazimierczuk<span class="hljs-regexp">/"</span></code>
+    </pre>
+    <p>
+      <strong>Example Response:</strong>
+    </p>
+    <pre>
+      <code class="lang-json">
+        [
+        <span class="hljs-string">"https://radaris.com/~Adam-Kazimierczuk/1515830380"</span>,
+        <span class="hljs-string">"https://radaris.com/~Anna-Kazimierczuk/1130543411"</span>,
+        <span class="hljs-string">"https://radaris.com/~Adam-Kazimierczuk/1817946293"</span>
+        ]
+      </code>
+    </pre>
+    <h4 id="3-get-detailed-data">3. Get detailed data</h4>
+    <p>
+      <strong>Endpoint:</strong>
+    </p>
+    <pre>
+      <code><span class="hljs-type">GET</span> /<span class="hljs-class"><span class="hljs-keyword">data</span></span></code>
+    </pre>
+    <p>
+      <strong>Description:</strong>
+      This endpoint retrieves detailed information about a person based on their profile URL.
+    </p>
+    <p>
+      <strong>Parameters:</strong>
+    </p>
+    <ul>
+      <li>
+        <code>url</code> (required): The URL of the person&#39;s profile.
+      </li>
+    </ul>
+    <p>
+      <strong>Example Request:</strong>
+    </p>
+    <pre>
+      <code class="lang-bash"><span class="hljs-symbol">curl</span> -G http://localhost:<span class="hljs-number">5000</span>/<span class="hljs-meta">data</span> --<span class="hljs-meta">data</span>-urlencode <span class="hljs-string">"url=https://radaris.com/~Adam-Kazimierczuk/1817946293"</span></code>
+    </pre>
+    <p>
+      <strong>Example Response:</strong>
+    </p>
+    <pre>
+      <code class="lang-json">
+        {
+        <span class="hljs-attr">"Addresses"</span>: <span class="hljs-string">"725 Parkwood Ave, Park Ridge, IL 60068"</span>,
+        <span class="hljs-attr">"Full Name"</span>: <span class="hljs-string">"Adam Kazimierczuk"</span>,
+        <span class="hljs-attr">"Occupation"</span>: <span class="hljs-string">"Supervisor"</span>,
+        <span class="hljs-attr">"Phones"</span>: [
+        <span class="hljs-string">"(847) 388-8916"</span>,
+        <span class="hljs-string">"(847) 384-8916"</span>
+        ] }
+      </code>
+    </pre>
+    <h3 id="running-the-project">Running the Project</h3>
+    <p>To run the project, make sure you have Flask and other dependencies installed. Then, you can start the Flask application with:</p>
+    <pre>
+      <code class="lang-bash"><span class="hljs-keyword">python</span> main.<span class="hljs-keyword">py</span></code>
+    </pre>
+    <p>
+      The API will be available at <code>http://localhost:5000</code> by default.
+    </p>
+    <p>This project facilitates easy interaction with Radaris.com for searching and retrieving detailed profile information about individuals. By exposing these endpoints, users can programmatically access and utilize the data provided by Radaris.com.</p>
+    <h3 id="credits">Credits</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/pb0xxx">https://github.com/pb0xxx</a> (Piotr Bednarski)
+      </li>
+    </ul>
+  </body>
+</html>
