@@ -18,12 +18,12 @@ This endpoint allows you to search for people based on a provided name. It retur
 **Parameters:**
 - `name` (required): The name of the person to search for.
 
-**Example Request:**
+**Example request:**
 ```bash
 curl -G http://localhost:5000/search --data-urlencode "name=Kazimierczuk"
 ```
 
-**Example Response:**
+**Example response:**
 ```json
 [
   {
@@ -54,12 +54,12 @@ This endpoint retrieves profile URLs for a person based on a provided URL fragme
 **Parameters:**
 - `href` (required): The URL fragment of the person's profile.
 
-**Example Request:**
+**Example request:**
 ```bash
 curl -G http://localhost:5000/urls --data-urlencode "href=/p/Adam/Kazimierczuk/"
 ```
 
-**Example Response:**
+**Example response:**
 ```json
 [
   "https://radaris.com/~Adam-Kazimierczuk/1515830380",
@@ -81,12 +81,12 @@ This endpoint retrieves detailed information about a person based on their profi
 **Parameters:**
 - `url` (required): The URL of the person's profile.
 
-**Example Request:**
+**Example request:**
 ```bash
 curl -G http://localhost:5000/data --data-urlencode "url=https://radaris.com/~Adam-Kazimierczuk/1817946293"
 ```
 
-**Example Response:**
+**Example response:**
 ```json
 {
   "Addresses": "725 Parkwood Ave, Park Ridge, IL 60068",
